@@ -7,5 +7,7 @@ class World {
     required this.cities,
   });
 
+  get isEmpty => cities.isEmpty;
+
   get isNotEmpty => cities.isNotEmpty;
 }
