@@ -1,24 +1,22 @@
 import 'package:flatlas/data/model/world.dart';
 import 'package:flutter/material.dart';
+import 'package:flatlas/presentation/watchers/world/world_watcher.dart';
 
 class MapView extends StatelessWidget {
-  final World world;
-  final double scaleFactor;
-  final Offset offset;
   final double maxHeight;
   final double maxWidth;
 
   const MapView({
     Key? key,
-    required this.world,
-    required this.scaleFactor,
-    required this.offset,
     this.maxHeight = double.infinity,
     this.maxWidth = double.infinity,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final world = context.world;
+    final scaleFactor = context.worldState.scaleFactor;
+    final offset = context.worldState.offset;
     return Stack(
       children: [
         CustomPaint(

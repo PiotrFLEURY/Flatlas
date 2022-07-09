@@ -1,19 +1,19 @@
 import 'package:flatlas/data/model/world.dart';
 import 'package:flatlas/domain/repositories/world_repository.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:watchers/states/generic_state.dart';
 
-class WorldViewModel with ChangeNotifier {
+class WorldState extends GenericState<World> {
   final WorldRepository repository;
-  World? _world;
   double scaleFactor = 1;
   Offset offset = Offset.zero;
 
-  WorldViewModel({required this.repository});
+  WorldState({required this.repository}) : super(const World(cities: []));
 
-  World? get world => _world;
+  World get world => value;
 
   Future<void> loadWorld() async {
-    _world = await repository.loadWorld();
+    value = await repository.loadWorld();
     notifyListeners();
   }
 
