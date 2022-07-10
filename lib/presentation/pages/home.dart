@@ -1,5 +1,4 @@
-import 'package:flatlas/domain/repositories/world_repository.dart';
-import 'package:flatlas/presentation/watchers/world/world_state.dart';
+import 'package:flatlas/presentation/watchers/world/world_status.dart';
 import 'package:flatlas/presentation/watchers/world/world_watcher.dart';
 import 'package:flatlas/presentation/widgets/atlas.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +10,23 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: WorldWatcher(
-        state: WorldState(repository: WorldRepository()),
-        builder: (context) {
-          if (context.world.isEmpty) {
-            context.loadWorld();
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return Atlas(
-              key: ValueKey('atlas#${DateTime.now()}'),
-            );
-          }
+        builders: {
+          loadingWorld: _loading,
+          showingWorld: _idle,
         },
       ),
+    );
+  }
+
+  Widget _loading(BuildContext context) {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _idle(BuildContext context) {
+    return Atlas(
+      key: ValueKey('atlas#${DateTime.now()}'),
     );
   }
 }

@@ -17,6 +17,7 @@ class MapView extends StatelessWidget {
     final world = context.world;
     final scaleFactor = context.worldState.scaleFactor;
     final offset = context.worldState.offset;
+    final highlighted = context.worldState.highlighted;
     return Stack(
       children: [
         CustomPaint(
@@ -37,7 +38,12 @@ class MapView extends StatelessWidget {
               (e) => Positioned(
                 left: offset.dx + e.x.toDouble() * scaleFactor,
                 top: offset.dy + e.y.toDouble() * scaleFactor,
-                child: Text(e.name),
+                child: Text(
+                  e.name,
+                  style: TextStyle(
+                    color: e.name == highlighted ? Colors.red : Colors.black,
+                  ),
+                ),
               ),
             )
             .toList(),

@@ -168,7 +168,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: ec7af91eaf833349504537ff55de1a8914330664
+      resolved-ref: "38374aab124e58df97a5ef3319aced393fd1eb9d"
       url: "https://github.com/PiotrFLEURY/watchers.git"
     source: git
     version: "0.0.1"

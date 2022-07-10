@@ -6,28 +6,72 @@ class MapActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // zoom in
-        ElevatedButton(
-          onPressed: () => context.worldState.zoomIn(),
-          child: const Text('Zoom in'),
-        ),
-        // reset zoom
-        ElevatedButton(
-          onPressed: () => context.worldState.resetZoom(),
-          child: const Text('Reset zoom'),
-        ),
-        // zoom out
-        ElevatedButton(
-          onPressed: () => context.worldState.zoomOut(),
-          child: const Text('Zoom out'),
-        ),
-        ElevatedButton(
-          onPressed: () => context.worldState.resetZoom(),
-          child: const Text('Reset location'),
-        ),
-      ],
+    return Container(
+      color: Colors.grey[200],
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * .1,
+            width: MediaQuery.of(context).size.width * .1,
+            child: TextField(
+              onSubmitted: (value) => context.worldState.highlight(value),
+            ),
+          ),
+          // zoom in
+          OutlinedButton(
+            onPressed: () => context.worldState.zoomIn(),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Zoom in',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+              ),
+            ),
+          ),
+          // reset zoom
+          OutlinedButton(
+            onPressed: () => context.worldState.resetZoom(),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Reset zoom',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+              ),
+            ),
+          ),
+          // zoom out
+          OutlinedButton(
+            onPressed: () => context.worldState.zoomOut(),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Zoom out',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+              ),
+            ),
+          ),
+          OutlinedButton(
+            onPressed: () => context.worldState.resetLocation(),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Reset location',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

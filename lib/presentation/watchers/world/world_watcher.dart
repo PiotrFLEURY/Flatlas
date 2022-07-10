@@ -1,10 +1,16 @@
 import 'package:flatlas/data/model/world.dart';
+import 'package:flatlas/domain/repositories/world_repository.dart';
 import 'package:flatlas/presentation/watchers/world/world_state.dart';
 import 'package:flutter/widgets.dart';
-import 'package:watchers/watchers/watcher.dart';
+import 'package:watchers/watchers.dart';
 
-class WorldWatcher extends Watcher<WorldState> {
-  WorldWatcher({super.key, required super.state, required super.builder});
+class WorldWatcher extends WatcherBuilder<WorldState> {
+  WorldWatcher({
+    super.key,
+    required super.builders,
+  }) : super(
+          state: WorldState(repository: WorldRepository()),
+        );
 
   static WorldWatcher of(BuildContext context) =>
       Watcher.of<WorldWatcher>(context);

@@ -8,22 +8,28 @@ class Atlas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisSize: MainAxisSize.max,
       children: [
-        GestureDetector(
-          onVerticalDragUpdate: (DragUpdateDetails details) {
-            final offset = Offset(
-              details.globalPosition.dx,
-              details.globalPosition.dy,
-            );
-            context.worldState.updateOffset(offset);
-          },
-          child: MapView(
-            maxHeight: MediaQuery.of(context).size.height * .9,
-            maxWidth: MediaQuery.of(context).size.width,
+        const MapActions(),
+        Expanded(
+          child: GestureDetector(
+            onVerticalDragUpdate: (DragUpdateDetails details) {
+              debugPrint('onVerticalDragUpdate');
+              final offset = Offset(
+                details.globalPosition.dx,
+                details.globalPosition.dy,
+              );
+              context.worldState.updateOffset(offset);
+            },
+            child: LayoutBuilder(
+              builder: (context, constraints) => MapView(
+                maxHeight: constraints.maxHeight,
+                maxWidth: constraints.maxHeight,
+              ),
+            ),
           ),
         ),
-        const MapActions(),
       ],
     );
   }
